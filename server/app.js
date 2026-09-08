@@ -23,7 +23,7 @@ import { initSocket } from "./socket.js";
 const port = process.env.PORT || 8082;
 const dbURI = process.env.DBURI;
 
-const app = express();
+export const app = express();
 
 mongoose.set("strictQuery", true);
 mongoose
