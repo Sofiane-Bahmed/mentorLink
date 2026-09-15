@@ -5,11 +5,8 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import {v2 as cloudinary} from 'cloudinary';
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
 
-import { adminRouter } from "./routers/adminRouter.js"
+
 import { mentorRouter } from "./routers/mentorRouter.js"
 import { aprenantRouter } from "./routers/aprenantRouter.js"
 import { userRouter } from "./routers/userRouter.js"
