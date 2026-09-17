@@ -149,33 +149,7 @@ export const getAvailableMentors = async (req, res) => {
 }
 
 
-// export const getAvailableMentors = async (req, res) => {
-//   try {
-//     // Get the pagination parameters from the query string
-//     const { page = 1, limit = 5 } = req.query;
-
-//     // Convert the page and limit values to numbers
-//     const pageNumber = parseInt(page);
-//     const limitNumber = parseInt(limit);
-
-//     // Calculate the skip value based on the page and limit
-//     const skip = (pageNumber - 1) * limitNumber;
-
-//     // Find all the mentors who are available with pagination
-//     const mentors = await Mentor.find({ isAvailable: true })
-//       .skip(skip)
-//       .limit(limitNumber);
-
-//     // Return the list of mentors
-//     res.status(200).json(mentors);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: `Error getting available mentors: ${error.message}` });
-//   }
-// };
 // Effectuer une demande de mentorat
-
-
 export const requestMentoring = async (req, res) => {
   //removed temporily the message from the request body to test the mentorship request without it
   const { aprenantId, mentorId } = req.body;
