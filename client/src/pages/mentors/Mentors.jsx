@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useMentors } from '../../hooks/useMentors';
 
 import NavBar from '../../components/navbar/NavBar';

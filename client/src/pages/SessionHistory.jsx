@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { getSessionHistory } from '../api/sessionService';
 import NavBar from '../components/navbar/NavBar';
 import Footer from '../components/footer/Footer';
 import Pagination from '../components/Pagination';
 import { MdHistory, MdCalendarToday, MdAccessTime, MdPerson, MdSearch, MdVideocam } from 'react-icons/md';
-import { Link } from 'react-router-dom';
 
 const SessionHistory = () => {
   const { user: localUser } = useAuth();
