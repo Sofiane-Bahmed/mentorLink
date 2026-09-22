@@ -52,15 +52,14 @@ export const createUser = async (req, res) => {
     }
   } else if (userRole === "mentor") {
     try {
-
-      const mentor = new Mentor({
+      const mentor = await Mentor.create({
         userRole,
         firstName,
         lastName,
         mail,
         password: hashedPassword,
       });
-      await mentor.save();
+
       res.json(mentor);
     } catch (error) {
       res.json(error);
@@ -99,12 +98,12 @@ export const logIn = async (req, res) => {
 
     res.cookie("userId", userId);
     res.cookie("userRole", userRole);
-    
+
     const avatarUrl = user.image?.url || "";
-    
-    res.status(200).json({ 
-      message: "user loged in succesfully", 
-      user: { userId, userRole, avatarUrl } 
+
+    res.status(200).json({
+      message: "user loged in succesfully",
+      user: { userId, userRole, avatarUrl }
     });
 
   } catch (error) {
