@@ -37,14 +37,14 @@ export const createUser = async (req, res) => {
     }
   } else if (userRole === "aprenant") {
     try {
-
-      const aprenant = new Aprenant({
+      const aprenant = await Aprenant.create({
         userRole,
         firstName,
         lastName,
         mail,
         password: hashedPassword,
       });
+
       await aprenant.save();
       res.json(aprenant);
     } catch (error) {
