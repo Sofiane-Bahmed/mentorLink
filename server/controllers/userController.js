@@ -18,19 +18,17 @@ export const createUser = async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, salt);
 
-
   if (userRole === "admin") {
 
     try {
-
-      const admin = new Admin({
+      const admin = await Admin.create({
         userRole,
         firstName,
         lastName,
         mail,
         password: hashedPassword,
-      });
-      await admin.save();
+      })
+
       res.json(admin);
     } catch (error) {
       res.json(error);
@@ -45,7 +43,6 @@ export const createUser = async (req, res) => {
         password: hashedPassword,
       });
 
-      await aprenant.save();
       res.json(aprenant);
     } catch (error) {
       res.json(error);
