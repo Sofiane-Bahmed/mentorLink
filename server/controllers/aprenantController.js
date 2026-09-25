@@ -31,26 +31,34 @@ export const viewAprenantProfile = async (req, res) => {
 
 export const updateApprenantProfile = async (req, res) => {
 
-  const { domainInteret, studyLevel, availability, about, goal, firstName, lastName } = req.body;
-  console.log(req.body);
+  const {
+    domainInteret,
+    studyLevel,
+    availability,
+    about,
+    goal,
+    firstName,
+    lastName } = req.body;
+    
   const aprenantId = req.params.id;
 
   try {
-    const aprenant = await Aprenant.findById(aprenantId);
+    const aprenant = await Aprenant.findByIdAndUpdate(aprenantId, {
+      firstName,
+      lastName,
+      domainInteret,
+      studyLevel,
+      availability,
+      about,
+      goal
+    }, {
+      new: true,
+      runValidators: true
+    });
 
     if (!aprenant) {
-      return res.status(404).json({ message: "aprenant not found" });
-    }
-
-    aprenant.firstName = firstName;
-    aprenant.lastName = lastName;
-    aprenant.domainInteret = domainInteret;
-    aprenant.studyLevel = studyLevel;
-    aprenant.availability = availability;
-    aprenant.about = about;
-    aprenant.goal = goal;
-
-    await aprenant.save();
+      return res.status(404).json({ message: 'aprenant not found' });
+    };
 
     return res.status(200).json({ aprenant });
   } catch (error) {
