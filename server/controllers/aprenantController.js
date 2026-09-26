@@ -39,7 +39,7 @@ export const updateApprenantProfile = async (req, res) => {
     goal,
     firstName,
     lastName } = req.body;
-    
+
   const aprenantId = req.params.id;
 
   try {
@@ -170,13 +170,11 @@ export const requestMentoring = async (req, res) => {
       return res.status(404).json({ message: "Aprenant or mentor not found." });
     }
 
-    const request = new MentorshipRequest({
+    const request = await MentorshipRequest.create({
       aprenant: aprenantId,
       mentor: mentorId,
       status: "pending"
-    });
-
-    await request.save();
+    })
 
     aprenant.mentorshipsRequests.push(request._id);
     await aprenant.save()
