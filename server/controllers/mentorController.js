@@ -27,41 +27,58 @@ export const viewMentorProfile = async (req, res) => {
 // modifier son profil 
 
 export const updateMentorProfile = async (req, res) => {
+  const { mentorId } = req.params;
 
-
-  const { lastName, firstName, company, domain, experience, disponibility, about, skills, localisation, responseTime, price } = req.body;
-
-  const mentorId = req.params.id;
-
+  const {
+    lastName,
+    firstName,
+    company,
+    domain,
+    experience,
+    disponibility,
+    about,
+    skills,
+    localisation,
+    responseTime,
+    price
+  } = req.body;
 
   try {
-    const mentor = await Mentor.findById(mentorId);
+    const mentor = await Mentor.findByIdAndUpdate(
+      mentorId,
+      {
+        lastName,
+        firstName,
+        company,
+        domain,
+        experience,
+        disponibility,
+        about,
+        skills,
+        localisation,
+        responseTime,
+        price
+      },
+      {
+        new: true,
+        runValidators: true
+      });
 
     if (!mentor) {
       return res.status(404).json({ message: "Mentor not found" });
     }
-    mentor.firstName = firstName;
-    mentor.lastName = lastName;
-    mentor.localisation = localisation;
-    mentor.disponibility = disponibility;
-    mentor.responseTime = responseTime;
-    mentor.company = company;
-    mentor.domain = domain;
-    mentor.experience = experience;
-    mentor.about = about;
-    mentor.price = price;
-    mentor.skills = skills;
 
-
-    await mentor.save();
-
-    return res.status(200).json({ message: "Mentor profile updated successfully", mentor });
+    return res
+      .status(200)
+      .json({
+        message: "Mentor profile updated successfully",
+        mentor
+      });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Something went wrong. Please try again later" });
   }
 };
-
 
 // modifier son profilImage 
 
