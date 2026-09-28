@@ -12,7 +12,7 @@ import { Session } from "../models/session.js";
 
 export const viewMentorProfile = async (req, res) => {
   try {
-    const mentorId = req.params.id;
+    const { mentorId } = req.params;
     const mentor = await Mentor.findById(mentorId).populate('userInherit');
     if (!mentor) {
       return res.status(404).json({ message: 'Mentor not found' });
@@ -85,7 +85,7 @@ export const updateMentorProfile = async (req, res) => {
 export const updateMentorImage = async (req, res) => {
 
   try {
-    const mentorId = req.params.id;
+    const { mentorId } = req.params;
     const mentor = await Mentor.findById(mentorId);
 
     if (!mentor) {
@@ -135,7 +135,7 @@ export const updateMentorImage = async (req, res) => {
 
 export const mentorSessionHistory = async (req, res) => {
 
-  const mentorId = req.params.id;
+  const { mentorId } = req.params;
 
   try {
 
@@ -206,7 +206,7 @@ export const aprenantProgress = async (req, res) => {
 // consulter un aprenant specific : 
 export const getSpecificAprentice = async (req, res) => {
 
-  const aprenantId = req.params.id
+  const { aprenantId } = req.params;
   try {
     const aprenant = await Aprenant.findById(aprenantId)
 

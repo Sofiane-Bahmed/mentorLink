@@ -24,13 +24,11 @@ export const createMentorshipRequest = async (req, res) => {
       }
     }
 
-    const newRequest = new MentorshipRequest({
+    const newRequest = await MentorshipRequest.create({
       aprenant: aprenantId,
       mentor: mentorId,
       message,
     });
-
-    await newRequest.save();
 
     // Update Aprenant and Mentor models
     const aprenant = await Aprenant.findByIdAndUpdate(aprenantId, {
@@ -56,47 +54,47 @@ export const createMentorshipRequest = async (req, res) => {
 // Consulter les demandes de mentorat
 
 export const getMentorshipRequests = async (req, res) => {
-    
-       const mentorId = req.params.id
-       try {
-           const mentor = await Mentor.findById(mentorId).populate({
-             path: "mentorshipsRequests",
-             populate: { path: "aprenant" }
-           });
-        
-            if(!mentor || !mentor.mentorshipsRequests){
-               return res.json({message : "there are no requests"})
-            }
 
-            res.send({requests: mentor.mentorshipsRequests})
-             
-       } catch (error) {
-        console.log(error)
-        res.status(500).send(error.message);
-       }
+  const mentorId = req.params.id
+  try {
+    const mentor = await Mentor.findById(mentorId).populate({
+      path: "mentorshipsRequests",
+      populate: { path: "aprenant" }
+    });
+
+    if (!mentor || !mentor.mentorshipsRequests) {
+      return res.json({ message: "there are no requests" })
+    }
+
+    res.send({ requests: mentor.mentorshipsRequests })
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error.message);
+  }
 }
 
 
 // Consulter les demandes de mentorat (Aprenant)
 
 export const getMentorshipRequestsApreant = async (req, res) => {
-    
+
   const aprenantId = req.params.id
   try {
-      const aprenant = await Aprenant.findById(aprenantId).populate({
-        path: "mentorshipsRequests",
-        populate: { path: "mentor" }
-      });
-   
-       if(!aprenant || !aprenant.mentorshipsRequests){
-          return res.json({message : "there are no requests"})
-       }
+    const aprenant = await Aprenant.findById(aprenantId).populate({
+      path: "mentorshipsRequests",
+      populate: { path: "mentor" }
+    });
 
-       res.send({requests: aprenant.mentorshipsRequests})
-        
+    if (!aprenant || !aprenant.mentorshipsRequests) {
+      return res.json({ message: "there are no requests" })
+    }
+
+    res.send({ requests: aprenant.mentorshipsRequests })
+
   } catch (error) {
-   console.log(error)
-   res.status(500).send(error.message);
+    console.log(error)
+    res.status(500).send(error.message);
   }
 }
 
@@ -108,7 +106,7 @@ export const getMentorshipRequestById = async (req, res) => {
     const mentorshipRequest = await MentorshipRequest.findById(requestId)
       .populate("aprenant")
       .populate("mentor");
-    
+
     if (!mentorshipRequest) {
       return res.status(404).json({ message: "Mentorship request not found" });
     }
@@ -123,7 +121,7 @@ export const getMentorshipRequestById = async (req, res) => {
 export const acceptMentorshipRequest = async (req, res) => {
   try {
     const { requestId, mentorId, responseMessage } = req.body;
-    
+
     // Find the mentor by ID
     const mentor = await Mentor.findById(mentorId);
     if (!mentor) {
@@ -165,11 +163,11 @@ export const acceptMentorshipRequest = async (req, res) => {
 // reject a mentorship request 
 
 export const rejectMentorshipRequest = async (req, res) => {
-  const {mentorId, requestId, responseMessage} = req.body
+  const { mentorId, requestId, responseMessage } = req.body
   try {
     const mentor = await Mentor.findById(mentorId)
-    if (!mentor ){
-      return res.status(404).json({message:"mentor not found" })
+    if (!mentor) {
+      return res.status(404).json({ message: "mentor not found" })
     }
 
     const mentorshipRequest = await MentorshipRequest.findById(requestId).populate("aprenant");

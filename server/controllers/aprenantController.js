@@ -1,22 +1,18 @@
 import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
 
 import { Aprenant } from "../models/aprenant.js";
 import { Mentor } from "../models/mentor.js";
 import { MentorshipRequest } from "../models/mentorshipRequest.js";
 import { Session } from "../models/session.js";
-import { User } from "../models/user.js";
 
 // consulter son profil
 
 export const viewAprenantProfile = async (req, res) => {
 
-  const apprenantId = req.params.id;
+  const { aprenantId } = req.params;
 
   try {
-    const aprenant = await Aprenant.findById(apprenantId);
+    const aprenant = await Aprenant.findById(aprenantId);
     if (!aprenant) {
       return res.status(404).json({ message: 'apprenant not found' });
     }
@@ -74,7 +70,7 @@ export const updateAprenantImage = async (req, res) => {
 
   try {
 
-    const aprenantId = req.params.id;
+    const { aprenantId } = req.params;
     const aprenant = await Aprenant.findById(aprenantId);
 
     if (!aprenant) {
@@ -126,7 +122,7 @@ export const updateAprenantImage = async (req, res) => {
 
 export const aprenantSessionHistory = async (req, res) => {
 
-  const aprenantId = req.params.id;
+  const { aprenantId } = req.params;
 
   try {
     const sessions = await Aprenant.findById(aprenantId).populate("sessions")
@@ -192,7 +188,7 @@ export const requestMentoring = async (req, res) => {
 
 export const getSpecificMentor = async (req, res) => {
 
-  const mentorId = req.params.id
+  const { mentorId } = req.params;
   try {
     const mentor = await Mentor.findById(mentorId)
 
