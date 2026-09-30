@@ -55,7 +55,7 @@ export const createMentorshipRequest = async (req, res) => {
 
 export const getMentorshipRequests = async (req, res) => {
 
-  const mentorId = req.params.id
+  const { mentorId } = req.params
   try {
     const mentor = await Mentor.findById(mentorId).populate({
       path: "mentorshipsRequests",
@@ -79,7 +79,7 @@ export const getMentorshipRequests = async (req, res) => {
 
 export const getMentorshipRequestsApreant = async (req, res) => {
 
-  const aprenantId = req.params.id
+  const { aprenantId } = req.params
   try {
     const aprenant = await Aprenant.findById(aprenantId).populate({
       path: "mentorshipsRequests",
@@ -129,21 +129,13 @@ export const acceptMentorshipRequest = async (req, res) => {
     }
 
     // Find the mentorship request by ID
-    const mentorshipRequest = await MentorshipRequest.findById(requestId).populate("aprenant");
+    const mentorshipRequest = await findByIdAndUpdate(requestId, {
+      status: 'accepted',
+      responseMessage: responseMessage
+    })
     if (!mentorshipRequest) {
       return res.status(404).send('Mentorship request not found');
     }
-
-    // Check if the mentorship request has already been accepted
-    if (mentorshipRequest.status === 'accepted') {
-      return res.status(400).send('Mentorship request has already been accepted');
-    }
-
-    // Update the mentorship request status to accepted
-    mentorshipRequest.status = 'accepted';
-    mentorshipRequest.responseMessage = responseMessage;
-
-    await mentorshipRequest.save();
 
     // Notify Aprenant
     console.log(`Sending acceptance notification to aprenant: ${mentorshipRequest.aprenant._id.toString()}`);
