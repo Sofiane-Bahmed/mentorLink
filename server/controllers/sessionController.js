@@ -21,16 +21,14 @@ export const launchMentoringSession = async (req, res) => {
     }
 
     // Create the new session
-    const session = new Session({
+    const session = await Session.create({
       mentor: mentorId,
       aprenant: aprenantId,
       startTime,
       endTime: "ongoing", // Will be updated later if needed
       link,
       date: date || new Date()
-    });
-
-    await session.save();
+    })
 
     mentor.sessions.push(session._id);
     await mentor.save();
@@ -51,10 +49,10 @@ export const getSessionsHistory = async (req, res) => {
     const { role, page = 1, limit = 10, search = "" } = req.query;
 
     const query = role === 'mentor' ? { mentor: userId } : { aprenant: userId };
-    
+
     // Search logic (could be improved by populating and searching on partner name)
     // For now, let's just get the sessions and populate partner info
-    
+
     const sessions = await Session.find(query)
       .populate('mentor', 'firstName lastName mail image')
       .populate('aprenant', 'firstName lastName mail image')
