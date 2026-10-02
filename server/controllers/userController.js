@@ -9,11 +9,7 @@ import { createToken } from "../middelwares/jwt.js";
 //register :
 
 export const createUser = async (req, res) => {
-  const userRole = req.body.userRole;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const mail = req.body.mail;
-  const password = req.body.password;
+  const { userRole, firstName, lastName, mail, password } = req.body;
   const salt = bcrypt.genSaltSync(10);
 
   const hashedPassword = await bcrypt.hash(password, salt);
@@ -126,7 +122,7 @@ export const logOut = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     // const user = await User.findById(id);
     const updateUser = await User.findByIdAndUpdate(id, {
       nom: req.body.nom,
@@ -156,7 +152,7 @@ export const getAllUsers = async (req, res) => {
 // get an user 
 
 export const getAnUser = async (req, res) => {
-  const userId = req.params.id
+  const { userId } = req.params;
   try {
     const user = await User.findById(userId)
 
@@ -185,7 +181,7 @@ export const deleteAllUsers = async (req, res) => {
 // delete a user 
 
 export const deleteAnUser = async (req, res) => {
-  const userId = req.params.id
+  const { userId } = req.params;
   try {
     const user = await User.findByIdAndDelete(userId)
 
