@@ -121,20 +121,21 @@ export const logOut = async (req, res) => {
 // update a user :
 
 export const updateUser = async (req, res) => {
+  const { nom, prenom, mail, password } = req.body;
   try {
     const { id } = req.params;
     // const user = await User.findById(id);
     const updateUser = await User.findByIdAndUpdate(id, {
-      nom: req.body.nom,
-      prenom: req.body.prenom,
-      mail: req.body.mail,
-      password: req.body.password,
+      nom,
+      prenom,
+      mail,
+      password,
     }, { returnDocument: 'after' }
     );
 
-    res.send(updateUser);
+    res.status(200).json(updateUser);
   } catch (err) {
-    res.send(err);
+    res.status(500).json({ message: "An error occurred while updating the user", error: err.message });
   }
 };
 
