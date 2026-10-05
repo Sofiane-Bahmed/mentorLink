@@ -17,14 +17,12 @@ export const sendMessage = async (req, res) => {
 
     const conversationId = [senderId, receiverId].sort().join("_");
 
-    const newMessage = new Message({
+    const newMessage = await Message.create({
       sender: senderId,
       receiver: receiverId,
       message,
       conversationId
-    });
-
-    await newMessage.save();
+    })
 
     // Notify Receiver
     sendNotification(receiverId, {
@@ -51,7 +49,7 @@ export const getMessages = async (req, res) => {
 
   try {
     const conversationId = [senderId, receiverId].sort().join("_");
-    
+
     const messages = await Message.find({ conversationId })
       .sort({ createdAt: 1 })
       .populate("sender receiver", "firstName lastName image");
