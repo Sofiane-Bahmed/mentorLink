@@ -162,14 +162,17 @@ export const rejectMentorshipRequest = async (req, res) => {
       return res.status(404).json({ message: "mentor not found" })
     }
 
-    const mentorshipRequest = await MentorshipRequest.findById(requestId).populate("aprenant");
+    const mentorshipRequest = await MentorshipRequest.findByIdAndUpdate(requestId, {
+      status: "rejected",
+      responseMessage: responseMessage
+    }, {
+      new: true,
+      runValidators: true
+    });
+
     if (!mentorshipRequest) {
       return res.status(404).send({ message: "Mentorship request not found" });
     }
-
-    mentorshipRequest.status = "rejected";
-    mentorshipRequest.responseMessage = responseMessage;
-    await mentorshipRequest.save();
 
     // Notify Aprenant
     console.log(`Sending rejection notification to aprenant: ${mentorshipRequest.aprenant._id.toString()}`);
