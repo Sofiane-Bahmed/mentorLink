@@ -181,9 +181,16 @@ export const aprenantProgress = async (req, res) => {
 
     // Update the session's note and set hasRated to true
 
-    session.note = note;
-    session.hasRated = true;
-    await session.save();
+    await Session.findByIdAndUpdate(sessionId,
+      {
+        note,
+        hasRated: true
+      }, {
+      new: true,
+      runValidators: true,
+    }
+    );
+
 
     // Calculate the overall progress for the apprentice
     const aprenantSessions = await Session.find({ aprenant: session.aprenant._id, hasRated: true });
