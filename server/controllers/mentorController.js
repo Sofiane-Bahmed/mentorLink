@@ -168,7 +168,6 @@ export const aprenantProgress = async (req, res) => {
     }
 
     // Check if the mentor has already rated this session
-
     if (session.hasRated) {
       return res.status(400).json({ message: "Mentor has already rated this session" });
     }
@@ -185,12 +184,12 @@ export const aprenantProgress = async (req, res) => {
       {
         note,
         hasRated: true
-      }, {
-      new: true,
-      runValidators: true,
-    }
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
     );
-
 
     // Calculate the overall progress for the apprentice
     const aprenantSessions = await Session.find({ aprenant: session.aprenant._id, hasRated: true });
@@ -198,10 +197,10 @@ export const aprenantProgress = async (req, res) => {
     const aprenantOverallProgress = aprenantProgress / aprenantSessions.length;
 
     // Update the apprentice's overall progress
-
-    const aprenant = await Aprenant.findById(session.aprenant._id);
-    aprenant.progress = aprenantOverallProgress;
-    await aprenant.save();
+    sessionId = session.aprenant._id
+    await Aprenant.findByIdAndUpdate(sessionId, {
+      progress: aprenantOverallProgress
+    })
 
     res.status(200).json({ message: "Apprentice noted successfully." });
   } catch (error) {
