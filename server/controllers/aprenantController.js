@@ -36,7 +36,7 @@ export const updateApprenantProfile = async (req, res) => {
     firstName,
     lastName } = req.body;
 
-  const aprenantId = req.params.id;
+  const { aprenantId } = req.params;
 
   try {
     const aprenant = await Aprenant.findByIdAndUpdate(aprenantId, {
@@ -100,12 +100,13 @@ export const updateAprenantImage = async (req, res) => {
     const result = await cloudinary.uploader.upload(fileUrl);
 
     // Update the aprenant's profile with the Cloudinary image URL
-
-    aprenant.image = {
+    await Aprenant.findByIdAndUpdate(aprenantId, {
       publicId: result.public_id,
-      url: result.secure_url,
-    };
-    await aprenant.save();
+      url: result.secure_url
+    }, {
+      new: true,
+      runValidators: true
+    });
 
     // Remove the uploaded image from the server's upload directory (optional)
     // fs.unlinkSync(req.file.path);
