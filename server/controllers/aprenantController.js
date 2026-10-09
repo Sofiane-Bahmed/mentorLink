@@ -69,7 +69,6 @@ export const updateApprenantProfile = async (req, res) => {
 export const updateAprenantImage = async (req, res) => {
 
   try {
-
     const { aprenantId } = req.params;
     const aprenant = await Aprenant.findById(aprenantId);
 
