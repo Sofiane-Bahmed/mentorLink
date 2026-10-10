@@ -293,8 +293,11 @@ export const rateMentor = async (req, res) => {
 
     // Update the session with the rating
 
-    session.rating = rating;
-    await session.save();
+    await Session.findByIdAndUpdate(sessionId,
+      { rating }, {
+      new: true,
+      runValidators: true
+    });
 
     // Calculate the overall rating for the mentor
 
