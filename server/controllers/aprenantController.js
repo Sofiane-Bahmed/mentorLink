@@ -22,7 +22,6 @@ export const viewAprenantProfile = async (req, res) => {
   }
 };
 
-
 // modifier son profil
 
 export const updateApprenantProfile = async (req, res) => {
@@ -127,10 +126,11 @@ export const aprenantSessionHistory = async (req, res) => {
   try {
     const sessions = await Aprenant.findById(aprenantId).populate("sessions")
 
-    res.send({ sessions })
+    res.status(200).json({ sessions })
 
   } catch (error) {
     console.log(error)
+    res.status(500).json({ message: `Error retrieving session history: ${error.message}` });
   }
 };
 
