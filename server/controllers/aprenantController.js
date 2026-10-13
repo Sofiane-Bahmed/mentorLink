@@ -308,8 +308,13 @@ export const rateMentor = async (req, res) => {
     // Update the mentor's overall rating
 
     const mentor = await Mentor.findById(session.mentor._id);
-    mentor.rating = mentorOverallRating;
-    await mentor.save();
+    await Mentor.findByIdAndUpdate(mentor._id,
+      {
+        rating: mentorOverallRating
+      }, {
+      new: true,
+      runValidators: true
+    });
 
     res.status(200).json({ message: "Mentor rated successfully." });
   } catch (error) {
