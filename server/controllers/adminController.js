@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-
 import { Admin } from "../models/admin.js"
 
 import { Aprenant } from "../models/aprenant.js";
@@ -8,15 +6,16 @@ import { Aprenant } from "../models/aprenant.js";
 
 // create apprenant
 
-const createApprenant = async (req,res)=>{
-      try {
-         const apprenant = new Aprenant({
-            admin : req.cookies["userId"].userId,
-            
-         })
-          
+const createApprenant = async (req, res) => {
+   try {
+      const apprenant = Aprenant.create({
+         admin: req.cookies["userId"].userId,
 
-      } catch (error) {
-        
-      }
+      })
+
+      res.Admin(201).json({ message: "Apprenant created successfully", apprenant })
+
+   } catch (error) {
+
+   }
 }
