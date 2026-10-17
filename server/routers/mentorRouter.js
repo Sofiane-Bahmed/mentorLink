@@ -14,7 +14,7 @@ import { upload } from "../middelwares/multer.js"
 export const mentorRouter = Express.Router()
 
 
-mentorRouter.get("/viewProfile/:id", viewMentorProfile)
+mentorRouter.get("/myProfile/:id", viewMentorProfile)
 mentorRouter.put("/modifierProfile/:id", mentorAutorisation, updateMentorProfile)
 mentorRouter.put("/modifierProfileImage/:id", mentorAutorisation, upload.single("image"), updateMentorImage)
 mentorRouter.get("/getAprentice/:id", mentorAutorisation, getSpecificAprentice)

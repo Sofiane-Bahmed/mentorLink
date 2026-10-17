@@ -73,7 +73,7 @@ app.use("/message", messageRouter)
 app.use("/stream", streamRouter)
 
 // Global error handler
-app.use((err, req, res, next) => {
+app.use((err, res) => {
   console.error('Unhandled error:', err);
   res.status(500).json({ message: 'Internal Server Error', error: err.message });
 });
