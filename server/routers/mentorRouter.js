@@ -10,13 +10,11 @@ import {
 import { mentorAutorisation } from "../middelwares/jwt.js"
 import { upload } from "../middelwares/multer.js"
 
-
 export const mentorRouter = Express.Router()
-
 
 mentorRouter.get("/myProfile/:id", viewMentorProfile)
 mentorRouter.put("/modifierProfile/:id", mentorAutorisation, updateMentorProfile)
 mentorRouter.put("/modifierProfileImage/:id", mentorAutorisation, upload.single("image"), updateMentorImage)
-mentorRouter.get("/getAprentice/:id", mentorAutorisation, getSpecificAprentice)
+mentorRouter.get("/Aprentice/:id", mentorAutorisation, getSpecificAprentice)
 mentorRouter.get("/sessionsHistory/:id", mentorAutorisation, mentorSessionHistory)
 mentorRouter.post("/aprenantProgress", mentorAutorisation, aprenantProgress)
