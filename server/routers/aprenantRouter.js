@@ -16,7 +16,7 @@ aprenantRouter.put("/updateApprenantProfile/:id",aprenantAutorisation,updateAppr
 aprenantRouter.put("/updateApprenantProfileImage/:id",aprenantAutorisation, upload.single("image"), updateAprenantImage)
 aprenantRouter.get("/session/history/:id",aprenantAutorisation,aprenantSessionHistory)
 aprenantRouter.get("/mentors",getAvailableMentors)
-aprenantRouter.post("/requestMentoring",aprenantAutorisation,requestMentoring)
+aprenantRouter.post("/mentors/request",aprenantAutorisation,requestMentoring)
 aprenantRouter.get("/getSpecificMentor/:id",aprenantAutorisation,getSpecificMentor)
 aprenantRouter.get("/filtreMentorsByDomain",aprenantAutorisation,filtreMentorsByDomain)
 aprenantRouter.get("/filtreMentorsBySkills",aprenantAutorisation,filtreMentorsByskill)
