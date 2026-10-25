@@ -18,7 +18,7 @@ aprenantRouter.get("/session/history/:id",aprenantAutorisation,aprenantSessionHi
 aprenantRouter.get("/mentors",getAvailableMentors)
 aprenantRouter.post("/mentors/request",aprenantAutorisation,requestMentoring)
 aprenantRouter.get("/getSpecificMentor/:id",aprenantAutorisation,getSpecificMentor)
-aprenantRouter.get("/filtreMentorsByDomain",aprenantAutorisation,filtreMentorsByDomain)
+aprenantRouter.get("/mentors/filter/domain",aprenantAutorisation,filtreMentorsByDomain)
 aprenantRouter.get("/filtreMentorsBySkills",aprenantAutorisation,filtreMentorsByskill)
 aprenantRouter.get("/filtreMentorsByPrice",aprenantAutorisation,filtreMentorsByPrice)
 aprenantRouter.get("/filtreMentors",filtreMentors)
