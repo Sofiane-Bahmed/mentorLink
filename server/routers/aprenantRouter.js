@@ -23,4 +23,4 @@ aprenantRouter.get("/filtreMentorsBySkills",aprenantAutorisation,filtreMentorsBy
 aprenantRouter.get("/filtreMentorsByPrice",aprenantAutorisation,filtreMentorsByPrice)
 aprenantRouter.get("/filtreMentors",filtreMentors)
 aprenantRouter.get("/filtreMentorsByRating",aprenantAutorisation,filtreMentorsByRating)
-aprenantRouter.post("/rateMentor",aprenantAutorisation,rateMentor)
+aprenantRouter.post("/mentor/rate",aprenantAutorisation,rateMentor)
