@@ -13,7 +13,7 @@ export const mentorshipRequestRouter  = Express.Router()
 
 mentorshipRequestRouter.post("/mentorship/create", aprenantAutorisation, createMentorshipRequest)
 mentorshipRequestRouter.post("/mentorship/accept",mentorAutorisation,acceptMentorshipRequest)
-mentorshipRequestRouter.put("/rejectMentorship",mentorAutorisation,rejectMentorshipRequest)
+mentorshipRequestRouter.put("/mentorship/reject",mentorAutorisation,rejectMentorshipRequest)
 mentorshipRequestRouter.get("/getMentorship/:id",mentorAutorisation,getMentorshipRequests)
 mentorshipRequestRouter.get("//mentorship/aprenant/:id",aprenantAutorisation,getMentorshipRequestsApreant)
 mentorshipRequestRouter.get("/getRequest/:requestId", getMentorshipRequestById)
