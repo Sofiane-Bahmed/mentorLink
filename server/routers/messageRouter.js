@@ -10,6 +10,6 @@ export const messageRouter = Express.Router()
 messageRouter.post("/message/send", generalAutorisation, sendMessage)
 messageRouter.get("/message", generalAutorisation, getMessages)
 messageRouter.get("/conversations/:userId", generalAutorisation, getConversations)
-messageRouter.post("/markAsRead", generalAutorisation, markAsRead)
-messageRouter.delete("/deleteMessage", generalAutorisation, deleteMessage)
+messageRouter.post("/message/markAsRead", generalAutorisation, markAsRead)
+messageRouter.delete("/message/delete", generalAutorisation, deleteMessage)
 
