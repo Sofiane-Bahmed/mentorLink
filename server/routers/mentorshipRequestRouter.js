@@ -16,4 +16,4 @@ mentorshipRequestRouter.post("/mentorship/accept",mentorAutorisation,acceptMento
 mentorshipRequestRouter.put("/mentorship/reject",mentorAutorisation,rejectMentorshipRequest)
 mentorshipRequestRouter.get("/mentorship/get/:id",mentorAutorisation,getMentorshipRequests)
 mentorshipRequestRouter.get("/mentorship/aprenant/:id",aprenantAutorisation,getMentorshipRequestsApreant)
-mentorshipRequestRouter.get("/getRequest/:requestId", getMentorshipRequestById)
+mentorshipRequestRouter.get("/Request/:requestId", getMentorshipRequestById)
