@@ -11,7 +11,7 @@ import { upload } from "../middelwares/multer.js"
 export const aprenantRouter = Express.Router()
 
 
-aprenantRouter.get("/viewAprenantProfile/:id", generalAutorisation, viewAprenantProfile)
+aprenantRouter.get("/profile/:id", generalAutorisation, viewAprenantProfile)
 aprenantRouter.put("/updateApprenantProfile/:id",aprenantAutorisation,updateApprenantProfile)
 aprenantRouter.put("/updateApprenantProfileImage/:id",aprenantAutorisation, upload.single("image"), updateAprenantImage)
 aprenantRouter.get("/session/history/:id",aprenantAutorisation,aprenantSessionHistory)
