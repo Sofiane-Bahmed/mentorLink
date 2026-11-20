@@ -13,7 +13,7 @@ export const aprenantRouter = Express.Router()
 
 aprenantRouter.get("/profile/:id", generalAutorisation, viewAprenantProfile)
 aprenantRouter.put("/profile/:id",aprenantAutorisation,updateApprenantProfile)
-aprenantRouter.put("/updateApprenantProfileImage/:id",aprenantAutorisation, upload.single("image"), updateAprenantImage)
+aprenantRouter.put("/image/:id",aprenantAutorisation, upload.single("image"), updateAprenantImage)
 aprenantRouter.get("/session/history/:id",aprenantAutorisation,aprenantSessionHistory)
 aprenantRouter.get("/mentors",getAvailableMentors)
 aprenantRouter.post("/mentors/request",aprenantAutorisation,requestMentoring)
