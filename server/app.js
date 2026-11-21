@@ -67,7 +67,6 @@ app.use("/mentors", mentorRouter);
 app.use("/aprenants", aprenantRouter)
 app.use("/users", userRouter)
 app.use("/sessions", sessionRouter)
-app.use("/sessionFeedbacks", sessionFeedbackRouter)
 app.use("/requests", mentorshipRequestRouter)
 app.use("/message", messageRouter)
 app.use("/stream", streamRouter)
