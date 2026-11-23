@@ -5,5 +5,5 @@ import {mentorAutorisation} from "../middelwares/jwt.js"
 
 export const sessionRouter = Express.Router()
 
-sessionRouter.post("/session/launch",launchMentoringSession)
+sessionRouter.post("/launch",launchMentoringSession)
 sessionRouter.get("/history/:userId", getSessionsHistory)
