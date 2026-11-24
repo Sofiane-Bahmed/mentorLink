@@ -11,9 +11,9 @@ import {aprenantAutorisation, mentorAutorisation} from "../middelwares/jwt.js"
 
 export const mentorshipRequestRouter  = Express.Router()
 
-mentorshipRequestRouter.post("/mentorship/create", aprenantAutorisation, createMentorshipRequest)
-mentorshipRequestRouter.post("/mentorship/accept",mentorAutorisation,acceptMentorshipRequest)
-mentorshipRequestRouter.put("/mentorship/reject",mentorAutorisation,rejectMentorshipRequest)
-mentorshipRequestRouter.get("/mentorship/:id",mentorAutorisation,getMentorshipRequests)
-mentorshipRequestRouter.get("/mentorship/aprenant/:id",aprenantAutorisation,getMentorshipRequestsApreant)
-mentorshipRequestRouter.get("/mentorship/:requestId", getMentorshipRequestById)
+mentorshipRequestRouter.post("/create", aprenantAutorisation, createMentorshipRequest)
+mentorshipRequestRouter.post("/accept",mentorAutorisation,acceptMentorshipRequest)
+mentorshipRequestRouter.put("/reject",mentorAutorisation,rejectMentorshipRequest)
+mentorshipRequestRouter.get("/:id",mentorAutorisation,getMentorshipRequests)
+mentorshipRequestRouter.get("/aprenant/:id",aprenantAutorisation,getMentorshipRequestsApreant)
+mentorshipRequestRouter.get("/:requestId", getMentorshipRequestById)
